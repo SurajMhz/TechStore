@@ -1,0 +1,117 @@
+  .slider-wrapper {
+  background-color: #eef6ff; /* light blue background */
+  padding: 20px 0;
+}
+
+  .slider-container {
+    max-width: 100vw;
+    overflow: hidden;
+    position: relative;
+    margin: 20px auto;
+    background: #fff;
+    padding: 10px 0;
+  }
+
+  #sliderTrack {
+    display: flex;
+    transition: transform 0.4s ease-in-out;
+  }
+
+  .slider-card {
+    flex: 0 0 25%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 0 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    transition: box-shadow 0.3s;
+  }
+
+  .slider-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .slider-img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    display: block;
+    margin-bottom: 10px;
+    border-radius: 6px;
+  }
+
+  .slider-name {
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+    margin: 10px 0 0;
+    padding: 0 10px;
+  }
+
+  .slider-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: auto;
+    padding: 8px 12px;
+    background-color: #f9f9f9;
+    border-top: 1px solid #ddd;
+  }
+
+  .slider-price {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+  }
+
+  .slider-button {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .slider-button:hover {
+    background-color: #0056b3;
+  }
+
+  .dots {
+    text-align: center;
+    margin-top: 12px;
+  }
+
+  .dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 0 6px;
+    background-color: #bbb;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .dot.active {
+    background-color: #333;
+  }
+  .slider-wrapper {
+  background-color: #eef6ff;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

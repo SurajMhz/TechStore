@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart</title>
+</head>
+  <style>
+    .Pconfirm {
+      padding: 8px 15px;
+      color: green;
+      cursor: pointer;
+     border: 1px  black solid;
+      background-color: white solid;
+    }
+
+    .Pconfirm:hover {
+      background-color: lightgreen;
+      color: white;
+    }
+  </style>
+
+
+<body>
+  <link rel="stylesheet" href="../CSS/grid.css" />
+  <link rel="stylesheet" href="../CSS/page.css" />
+  <link rel="stylesheet" href="../CSS/login.css" />
+  <link rel="stylesheet" href="../CSS/Cart.css" />
+
+  <header>
+    <a href="Index.html" class="logo">TechStore</a>
+
+    <div class="search-bar">
+      <input type="text" placeholder="Search products..." />
+    </div>
+
+    <div class="nav-icons">
+
+      <a href="cart.html" class="cart-link login" aria-label="Cart">
+        <div class="cart-icon ">
+          <img src="../Image/cart-icon.png" alt="Cart Icon" />
+          <div class="cart-quantity cartQuantity">0</div>
+        </div>
+        <div class="cart-text">Cart</div>
+      </a>
+    </div>
+  </header>
+  <main>
+    <div class="Ctotal">
+      <h3>Cart Item</h3>
+
+      <div class="ShowTotalColumn">
+        <div class="ShowTotal">
+          <h2>Total: $</h2>
+          <div class="cartTotalShow">1</div>
+        </div>
+       <p class="proceed" style="
+       cursor:pointer; 
+       color:blue;
+      text-decoration:underline;
+      ">Proceed to Payment</p>
+      </div>
+    </div>
+<!-- Wrap payment modal in a full-width container with border -->
+<div id="payment-modal-container" style="display:none; border: 2px solid #ccc; border-radius: 10px; margin-top: 20px; padding: 10px 0;">
+  <div id="payment-modal" style="max-width: 400px; margin: 0 auto; padding: 10px 20px; background: #fff; border-radius: 10px; height: 150px; box-sizing: border-box; position: relative;">
+    <button id="closePaymentModal" class="close-btn" aria-label="Close payment form"
+      style="position:absolute; top:10px; right:10px; font-size: 24px; border:none; background:none; cursor:pointer;">&times;</button>
+    <h2 style="text-align:center; margin-bottom: 10px;">Proceed to Payment</h2>
+    
+    <p style="text-align:center; margin-bottom: 10px;">Please Enter Your Address: <input type="text" id="addressInput" placeholder="eg: NaagPokhari,Nepal"></p>
+    <div style="display:flex; justify-content:center; gap: 15px; align-items:center;">
+     
+      <label><input type="checkbox" id="cashCheckbox"> Cash In Hand</label>
+      <button class="Pconfirm" id="confirmBtn">Confirm</button>
+    </div>
+  </div>
+</div>
+
+
+    <div class="grid-section">
+      <div id="cart" class="grid"></div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Contact us: support@techstore.com | +1 (123) 456-7890</p>
+    <div class="footer-icons">
+
+    </div>
+  </footer>
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+  <script>
+    let page = "cart"
+const paymentModalContainer = document.getElementById("payment-modal-container");
+
+document.querySelector(".proceed").addEventListener("click", e => {
+  e.preventDefault();
+  paymentModalContainer.style.display = "block";
+  body.classList.add("modal-open");
+});
+
+document.getElementById("closePaymentModal").addEventListener("click", () => {
+  paymentModalContainer.style.display = "none";
+  body.classList.remove("modal-open");
+});
+//
+//window.addEventListener("click", e => {
+  //if (e.target === paymentModalContainer) {
+    //paymentModalContainer.style.display = "none";
+   // body.classList.remove("modal-open");
+ // }
+//});
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && paymentModalContainer.style.display === "block") {
+    paymentModalContainer.style.display = "none";
+    body.classList.remove("modal-open");
+  }
+});
+
+const confirmBtn = document.getElementById('confirmBtn');
+  const addressInput = document.getElementById('addressInput');
+  const cashCheckbox = document.getElementById('cashCheckbox');
+
+  confirmBtn.addEventListener('click', () => {
+    const address = addressInput.value.trim();
+    const isChecked = cashCheckbox.checked;
+
+    if (address === '') {
+      showToast('Please enter your address.', 'error');
+      return;
+    }
+    if (!isChecked) {
+      showToast('Please check the "Cash In Hand" option.', 'error');
+      return;
+    }
+
+
+  
+    alert("You will be updated about your purchase through Your mail.")
+    showToast('Payment confirmed!', 'success');
+    paymentModalContainer.style.display = "none"
+    body.classList.remove("modal-open");
+    
+  });
+
+  </script>
+  <script src="../JavaScript/product.js" defer></script>
+  <script src="../JavaScript/cart.js" defer></script>
+  <script src="../JavaScript/ToastNoti.js" defer></script>
+</body>
+
+</html>

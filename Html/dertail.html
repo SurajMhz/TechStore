@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="TechStore: Your one-stop online store for laptops, computers, and accessories." />
+    <meta name="author" content="TechStore" />
+    <title>TechStore</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../CSS/grid.css" />
+    <link rel="stylesheet" href="../CSS/page.css" />
+    <link rel="stylesheet" href="../CSS/login.css" />
+
+</head>
+
+<body>
+    <header>
+        <a href="Index.html" class="logo">TechStore</a>
+
+        <div class="nav-icons">
+            <label for=""><a href="Index.html" class="logo HomeBtn">Home</a></label>
+            <div class="logReg">
+
+                <button class='loginbtn' style="width:auto;">Login</button>
+                <button class='loginbtn' style="width:auto;">Register</button>
+            </div>
+            <div class="Usermenu">
+
+            </div>
+            <!-- LOGIN MODAL -->
+            <label id="LabelOfLogin">
+                <div id='login-form' class='login-page' style="display:none;">
+                    <div class="form-box" style="position:relative;">
+                        <button id="closeModal" class="close-btn" aria-label="Close login form">&times;</button>
+
+
+                        <div class='button-box'>
+                            <div id='btn'></div>
+
+                            <button type='button' onclick='login()' class='toggle-btn'>Log In</button>
+                            <button type='button' onclick='register()' class='toggle-btn'>Register</button>
+                        </div>
+                        <!--login-->
+                        <form onsubmit="Login(event)" id='login' class='input-group-login'>
+                            <input type='text' id="LEmail" class='input-field' placeholder='Email Id' required>
+                            <input type='password' id="LPass" class='input-field' placeholder='Enter Password' required>
+                            <input type='checkbox' class='check-box'><span>Remember Password</span>
+                            <button type='submit' onclick="Login();" class='submit-btn'>Log in</button>
+                        </form>
+                        <!-- register-->
+                        <form id='register' class='input-group-register' onsubmit="Register(event)">
+                            <input type='text' id="Fname" class='input-field' placeholder='Full Name' required>
+                            <input type='email' id="Email" class='input-field' placeholder='Email Id' required>
+                            <input type='password' id="Pass" class='input-field' placeholder='Enter Password' required>
+                            <input type='password' id="Cpass" class='input-field' placeholder='Confirm Password'
+                                required>
+                            <input type='checkbox' class='check-box' /><span>I agree to the terms and conditions</span>
+                            <button type='submit' class='submit-btn'>Register</button>
+                        </form>
+                    </div>
+                </div>
+            </label>
+            <div class="CartPlace">
+                <a href="cart.html" class="cart-link login" aria-label="Cart">
+                    <div class="cart-icon">
+                        <img src="../Image/cart-icon.png" alt="Cart Icon" />
+                        <div class="cart-quantity cartQuantity">0</div>
+                    </div>
+                    <div class="cart-text">Cart</div>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <div class="detailContent"></div>
+
+      
+        </div>
+
+
+
+
+
+    </main>
+
+    <footer>
+        <p>Contact us: support@techstore.com | +1 (123) 456-7890</p>
+        <div class="footer-icons"></div>
+    </footer>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container"></div>
+
+    <script>let page="Detail" </script>
+    <script src="../JavaScript/product.js" defer></script>
+    <script src="../JavaScript/productDetail.js" defer></script>
+    <script src="../JavaScript/cart.js" defer></script>
+    <script src="../JavaScript/loginModal.js" defer></script>
+    <script src="../JavaScript/LoginANDregister.js" defer></script>
+    <script src="../JavaScript/ToastNoti.js" defer></script>
+    <script src="../JavaScript/detailPage.js" defer></script>
+
+    <script>
+        document.getElementById("closeModal").addEventListener("click", () => {
+            document.getElementById("login-form").classList.remove("show");
+            document.body.classList.remove("modal-open");
+        });
+        //to make it so that while pressing more checks for logged in or not
+        document.querySelectorAll(".more-link").forEach(link => {
+            link.addEventListener("click", function (e) {
+                e.preventDefault(); // Stop default link behavior
+
+                const targetPage = this.dataset.target;
+
+                if (!localStorage.getItem("loggedInUser")) {
+                    showToast("⚠️ Please log in to view this page", "error");
+                } else {
+                    window.location.href = targetPage;
+                }
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>

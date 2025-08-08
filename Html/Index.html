@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="TechStore: Your one-stop online store for laptops, computers, and accessories." />
+  <meta name="author" content="TechStore" />
+  <title>TechStore</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../CSS/slider.css" />
+  <link rel="stylesheet" href="../CSS/grid.css" />
+  <link rel="stylesheet" href="../CSS/page.css" />
+  <link rel="stylesheet" href="../CSS/login.css" />
+  
+</head>
+
+<body>
+  <header>
+    <a href="Index.html" class="logo">TechStore</a>
+
+    <div class="search-wrapper">
+      <button class="search-toggle" aria-label="Toggle Search">🔍</button>
+      <div class="search-bar" id="searchBar">
+        <input type="text" id="search" placeholder="Search products..." />
+      </div>
+    </div>
+
+    <div class="nav-icons">
+      <label for=""><a href="Index.html" class="logo HomeBtn">Home</a></label>
+      <div class="logReg">
+        <button class='loginbtn' style="width:auto;">Login</button>
+        <button class='loginbtn' style="width:auto;">Register</button>
+      </div>
+      <div class="Usermenu">
+
+      </div>
+      <!-- LOGIN MODAL -->
+      <label id="LabelOfLogin">
+        <div id='login-form' class='login-page' style="display:none;">
+          <div class="form-box" style="position:relative;">
+            <button id="closeModal" class="close-btn" aria-label="Close login form">&times;</button>
+
+
+            <div class='button-box'>
+              <div id='btn'></div>
+
+              <button type='button' onclick='login()' class='toggle-btn'>Log In</button>
+              <button type='button' onclick='register()' class='toggle-btn'>Register</button>
+            </div>
+            <!--login-->
+            <form onsubmit="Login(event)" id='login' class='input-group-login'>
+              <input type='text' id="LEmail" class='input-field' placeholder='Email Id' required>
+              <input type='password' id="LPass" class='input-field' placeholder='Enter Password' required>
+              <input type='checkbox' class='check-box'><span>Remember Password</span>
+              <button type='submit' onclick="Login();" class='submit-btn'>Log in</button>
+            </form>
+            <!-- register-->
+            <form id='register' class='input-group-register' onsubmit="Register(event)">
+              <input type='text' id="Fname" class='input-field' placeholder='Full Name' required>
+              <input type='email' id="Email" class='input-field' placeholder='Email Id' required>
+              <input type='password' id="Pass" class='input-field' placeholder='Enter Password' required>
+              <input type='password' id="Cpass" class='input-field' placeholder='Confirm Password' required>
+              <input type='checkbox' class='check-box' /><span>I agree to the terms and conditions</span>
+              <button type='submit' class='submit-btn'>Register</button>
+            </form>
+          </div>
+        </div>
+      </label>
+      <div class="CartPlace">
+        <a href="cart.html" class="cart-link login" aria-label="Cart">
+          <div class="cart-icon">
+            <img src="../Image/cart-icon.png" alt="Cart Icon" />
+            <div class="cart-quantity cartQuantity">0</div>
+          </div>
+          <div class="cart-text">Cart</div>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  
+<div class="slider-wrapper">
+  <div class="slider-container">
+    <div id="sliderTrack"></div>
+  </div>
+  <div class="slider-dots" id="sliderDots"></div>
+</div>
+
+  <main>
+    <!-- Search results hidden by default -->
+    <div class="grid-section" id="searchResultsSection" style="display:none;">
+      <h3>🔍 Search Results</h3>
+      <div id="searchResults" class="grid"></div>
+    </div>
+
+    <div class="grid-section">
+      <h3>🔥 Offer Items <a href="OfferItem.html" class="more-link" data-target="OfferItem.html">More →</a></h3>
+      <div id="offer" class="grid"></div>
+    </div>
+
+    <div class="grid-section">
+      <h3>⭐ Top Sold Products <a href="TopSold.html" class="more-link" data-target="TopSold.html">More →</a></h3>
+      <div id="topSold" class="grid"></div>
+    </div>
+
+    <div class="grid-section">
+      <h3>Laptops <a href="Laptops.html" class="more-link" data-target="Laptops.html">More →</a></h3>
+      <div id="laptops" class="grid"></div>
+    </div>
+
+    <div class="grid-section">
+      <h3>Computers <a href="computers.html" class="more-link" data-target="computers.html">More →</a></h3>
+      <div id="computers" class="grid"></div>
+    </div>
+
+    <div class="grid-section">
+      <h3>Accessories <a href="Acessories.html" class="more-link" data-target="Acessories.html">More →</a></h3>
+      <div id="accessories" class="grid"></div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Contact us: support@techstore.com | +1 (123) 456-7890</p>
+    <div class="footer-icons"></div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+  <script>
+  const SliderProduct = [
+  { name: "MacBook Air M1", price: 899.99, image: "../Image/img3.png" },
+  { name: "ASUS ZenBook", price: 749.99, image: "../Image/img4.png" },
+  { name: "Razer Blade 15", price: 1499.99, image: "../Image/img8.png" },
+  { name: "iMac 24-inch", price: 1299.99, image: "../Image/img17.png" },
+  { name: "Dell OptiPlex", price: 499.99, image: "../Image/img19.png" },
+  { name: "Mechanical Keyboard", price: 39.99, image: "../Image/img21.png" },
+  { name: "Laptop Stand", price: 24.99, image: "../Image/img23.png" },
+  { name: "LED Desk Lamp", price: 21.99, image: "../Image/img29.png" }
+];
+
+  const sliderTrack = document.getElementById('sliderTrack');
+  const sliderDots = document.getElementById('sliderDots');
+
+  const imagesPerView = 4;
+  const totalSlides = Math.ceil(SliderProduct.length / imagesPerView);
+  let currentSlide = 0;
+
+  // Create slider cards
+  SliderProduct.forEach(prod => {
+    const div = document.createElement('div');
+    div.classList.add('slider-card');
+    div.innerHTML = `
+      <img src="${prod.image}" alt="${prod.name}" class="slider-img" />
+      <h3 class="slider-name">${prod.name}</h3>
+      <div class="slider-footer">
+        <p class="slider-price">Price: $${prod.price}</p>
+      </div>
+    `;
+    sliderTrack.appendChild(div);
+  });
+
+  // Create dots
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    if (i === 0) dot.classList.add('active');
+    dot.dataset.index = i;
+    sliderDots.appendChild(dot);
+
+    dot.addEventListener('click', () => {
+      currentSlide = i;
+      updateSlider();
+      resetAutoSlide();
+    });
+  }
+
+  function updateSlider() {
+    const shiftPercent = currentSlide * 100;
+    sliderTrack.style.transform = `translateX(-${shiftPercent}%)`;
+    sliderDots.querySelectorAll('.dot').forEach(dot => dot.classList.remove('active'));
+    sliderDots.querySelectorAll('.dot')[currentSlide].classList.add('active');
+  }
+
+  // Optional: auto-slide every 3 seconds
+  let autoSlide = setInterval(() => {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateSlider();
+  }, 3000);
+
+  function resetAutoSlide() {
+    clearInterval(autoSlide);
+    autoSlide = setInterval(() => {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateSlider();
+    }, 3000);
+  }
+
+</script>
+  <script> let page = "main";</script>
+  <script src="../JavaScript/product.js" defer></script>
+
+  <script src="../JavaScript/cart.js" defer></script>
+  <script src="../JavaScript/content.js" defer></script>
+  <script src="../JavaScript/mainpage.js" defer></script>
+  <script src="../JavaScript/search.js" defer></script>
+  <script src="../JavaScript/loginModal.js" defer></script>
+  <script src="../JavaScript/LoginANDregister.js" defer></script>
+  <script src="../JavaScript/ToastNoti.js" defer></script>
+  <!-- <script src="../JavaScript/slider.js" defer></script> -->
+  <script defer>
+    document.getElementById("closeModal").addEventListener("click", () => {
+      document.getElementById("login-form").classList.remove("show");
+      document.body.classList.remove("modal-open");
+    });
+    //to make it so that while pressing more checks for logged in or not
+    document.querySelectorAll(".more-link").forEach(link => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault(); // Stop default link behavior
+
+        const targetPage = this.dataset.target;
+
+        if (!localStorage.getItem("loggedInUser")) {
+          showToast("⚠️ Please log in to view this page", "error");
+        } else {
+          window.location.href = targetPage;
+        }
+      });
+    });
+
+  </script>
+
+</body>
+
+</html>
